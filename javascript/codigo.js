@@ -25,7 +25,7 @@ while (opcion <1 || opcion >5 ){ // si la opcion no es valida, se repite
     opcion=prompt("puedes seleccionar entre los 5 mejores caballos disponibles en el hipodromo \n \n * Caballo Dorado introducir numero 1 \n * Caballo Marron introducir numero 2 \n * Caballo Blanco introducir numero 3 \n * Caballo Negro introducir numero 4 \n * Caballo Dragon introducir numero 5");
 }
 function carrera(opcion){
-   const caballo = caballos[opcion-1] // Caballo Blanco
+   const caballo = caballos[opcion-1] 
    const { nombre, velocidad } = caballo
    const mensaje_encontrado = mensajes.find( (item)=>{
       return item.nombre === caballo.nombre
