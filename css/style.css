@@ -13,6 +13,9 @@
   ul {
     list-style: none;
   }
+  header{
+    background-color: greenyellow;
+  }
   .titulo{
     font-size: 2em;
   }
@@ -41,42 +44,87 @@
     color: red;
     font-weight: 800;
   }
+  
   .card-body{
-    height: 200px;
+    text-align: center;
+    transition: 1.5s;
   }
   .cartas{
     display: flex;
     flex-direction: row;
     margin-top: 20px;
-    gap: 20px;
+    gap: 40px;
     margin-inline: 10px;
   }
-  .card-body{
-    text-align: center;
+.card-img-top{
+  height: 300px;
+  background-size: cover;
 }
-  .card-body>p{
-    font-size: 1.2em;
+.card{
+  transition: 1s;
 }
-.informacion{
-    margin-top: 20px;
-    height: 400px;
-    background-color: aqua;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+.card:hover{
+  transform: scale(1.1);
+
 }
-.informacion>p{
-    font-size: 1.5em;
-    margin-left: 10px;
-    line-height: 1.5em;
-    width: 50%;
+body {
+  margin: 0;
 }
-.resultados{
-    width: 100%;
+.sect {
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
 }
-footer{
-    margin-top: 20px;
-    background-color: black;
-    height: 200px;
+#sect1 {
+  background-color: #333333cc;
+  color: #fff;
+  height: 700px;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  
+}
+#sect1>p{
+  font-size: 1.5em;
+  width: 40%;
+  margin-left: 20px;
+  line-height: 2em;
+  color: white;
 }
 
+video {
+  position: absolute;
+  top: -150px;
+  width: 100%;
+  z-index: -1;
+}
+h1 {
+  margin: 0;
+  padding-top: 3rem;
+  padding-left: 2rem;
+}
+h2,h3,h4 {
+  margin: 0;
+  padding: 1em;
+  padding-left: 2rem;
+}
+.seleccion{
+  display: flex;
+  flex-direction: column;
+}
+.container{
+  margin-top: 40px;
+  font-size: 1.5em;
+  height: 500px;
+}
+.order-1{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 40px;
+}
+input{
+  overflow: hidden;
+  width: 100%;
+}
