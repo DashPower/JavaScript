@@ -1,40 +1,87 @@
-alert("Bienvenido al sistema de apuestas de un hipodromo, podras observar en el siguiente listado los caballos disponibles");
 const caballos = [
-    {nombre: 'Caballo Marron' , velocidad: 40},
-    {nombre: 'Caballo Blanco' , velocidad: 45},
-    {nombre: 'Caballo Negro' , velocidad: 48},
-    {nombre: 'Caballo Dorado' , velocidad: 50},
-    {nombre: 'Caballo Dragon' , velocidad: 55}
+   { id: 1, nombre: 'Caballo Negro', velocidad: 40, carreras: 10 },
+   { id: 2, nombre: 'Caballo Marron', velocidad: 45, carreras: 15 },
+   { id: 3, nombre: 'Caballo Blanco', velocidad: 48, carreras: 5 },
+   { id: 4, nombre: 'Caballo Dorado', velocidad: 50, carreras: 20 }
 ];
-const mensajes = [
-   { nombre: 'Caballo Marron', msg: "el clasico de las carreras "},
-   { nombre: 'Caballo Blanco', msg: "el del poderoso Simon Bolivar "},
-   { nombre: 'Caballo Negro', msg: "el poderoso pero infalible "},
-   { nombre: 'Caballo Dorado', msg: "el mas brillante de todos "},
-   { nombre: 'Caballo Dragon', msg: "Acaso no se vieron Jake Long? "}
-]
-alert('Los caballos disponibles en este momento son ' + caballos.length)
-const n_random = Math.floor(Math.random() * caballos.length);
-const v_random = Math.floor(Math.random() * caballos.length);
-const nombre_caballo = caballos[n_random].nombre;
-const velocidad_caballo = caballos[v_random].velocidad;
-let opcion =prompt("puedes seleccionar entre los 5 mejores caballos disponibles en el hipodromo \n \n * Caballo Marron introducir numero 1 \n * Caballo Blanco introducir numero 2 \n * Caballo Negro introducir numero 3 \n * Caballo Dorado introducir numero 4 \n * Caballo Dragon introducir numero 5"); // introducir un valor a la variable opciones
-alert('Seleccionaste al caballo numero ' + opcion);
-while (opcion <1 || opcion >5 ){ // si la opcion no es valida, se repite
-    alert("La opcion introducida no esta disponible, Porfavor volver a introducir un numero correcto");
-    opcion=prompt("puedes seleccionar entre los 5 mejores caballos disponibles en el hipodromo \n \n * Caballo Dorado introducir numero 1 \n * Caballo Marron introducir numero 2 \n * Caballo Blanco introducir numero 3 \n * Caballo Negro introducir numero 4 \n * Caballo Dragon introducir numero 5");
-}
-function carrera(opcion){
-   const caballo = caballos[opcion-1] 
+let opcion
+const listaDatos = JSON.parse(localStorage.getItem('listaDatos') ?? '[]')
+function carrera(ganancia) {
+   const n_random = Math.floor(Math.random() * caballos.length);
+   const v_random = Math.floor(Math.random() * caballos.length);
+   const nombre_caballo = caballos[n_random].nombre;
+   const velocidad_caballo = caballos[v_random].velocidad;
+   const caballo = caballos[opcion - 1]
    const { nombre, velocidad } = caballo
-   const mensaje_encontrado = mensajes.find( (item)=>{
-      return item.nombre === caballo.nombre
-   } )
-   alert(`El ${nombre} ${mensaje_encontrado.msg}, con una velocidad de ${velocidad} km/h`)
-   if(nombre == nombre_caballo )  // cuando opciones es igual a resultado el ganador sera la opcion seleccionada
-      alert("Ha ganado el " + nombre_caballo + ' con una velocidad de ' + velocidad_caballo); 
-   else // en caso contrario te dira el verdadero ganador
-      alert("Has perdido :( el ganador es " + nombre_caballo + ' con una velocidad de ' + velocidad_caballo + "km/h");
-}
-console.log(carrera(opcion));
+   if (nombre == nombre_caballo) { // cuando opciones es igual a resultado el ganador sera la opcion seleccionada
+      Swal.fire({
+         title: 'Congratulations',
+         text: `Ha ganado el ${nombre_caballo} con una velocidad de ${velocidad_caballo}, tu premio es de ${ganancia}$`,
+         icon: 'success',
+         confirmButtonText: 'Cool'
+      })
+   }
+   else {// en caso contrario te dira el verdadero ganador
+      Swal.fire({
+         title: 'Lo sentimos',
+         text: `Has perdido :( el ganador es ${nombre_caballo} con una velocidad de ${velocidad_caballo}`,
+         icon: 'error',
+         confirmButtonText: 'Cool'
+      });
+      ganancia = 0
+   }
+   const datos = {
+      nombre_caballo,
+      velocidad_caballo,
+      ganancia
+   }
 
+   if (listaDatos.length === 10) {
+      listaDatos.shift()
+      listaDatos.push(datos)
+      localStorage.setItem('listaDatos', JSON.stringify(listaDatos))
+   } else if (listaDatos.length < 10) {
+      listaDatos.push(datos)
+      localStorage.setItem('listaDatos', JSON.stringify(listaDatos))
+   }
+}
+
+function clickCaballo(botoncito) {
+   const id = botoncito.getAttribute('infoid')
+   const caballo = caballos.find(item => item.id == id)
+   nombre.innerText = caballo.nombre
+   velocidad.innerText = caballo.velocidad
+   carreras.innerText = caballo.carreras
+   opcion = id
+
+   if (informacionCollapse._isShown()) {
+      informacionCollapse.hide()
+      setTimeout(() => informacionCollapse.show(), 500)
+   } else {
+      informacionCollapse.show()
+   }
+}
+function enviar() {
+   const apuestaValor = apuesta.value
+   const ganancia = apuestaValor * 2
+   carrera(ganancia)
+}
+
+function mostrarReporte() {
+
+   cuerpoReporte.innerHTML = ''
+
+   for (const item of listaDatos) {
+      cuerpoReporte.innerHTML += `
+         <tr>
+            <td>${item.nombre_caballo}</td>
+            <td>${item.velocidad_caballo}</td>
+            <td>${item.ganancia}</td>
+         </tr>
+      `
+   }
+}
+
+const informacionCollapse = new bootstrap.Collapse(informacion, {
+   toggle: false
+})

@@ -44,24 +44,24 @@
     color: red;
     font-weight: 800;
   }
-  
   .card-body{
     text-align: center;
-    transition: 1.5s;
   }
   .cartas{
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
-    gap: 40px;
-    margin-inline: 10px;
+    margin-block: 20px;
+    gap: 30px;
+    height: 500px;
+    
   }
 .card-img-top{
   height: 300px;
-  background-size: cover;
 }
 .card{
-  transition: 1s;
+  transition: 0.5s;
+  width: calc(25vw - 30px);
+  height: 450px !important;
 }
 .card:hover{
   transform: scale(1.1);
@@ -123,8 +123,27 @@ h2,h3,h4 {
   flex-direction: column;
   text-align: center;
   gap: 40px;
+  justify-content: center;
+  align-items: center;
 }
 input{
   overflow: hidden;
   width: 100%;
+  border-color: black;
+  border-radius: 1px;
+  
+}
+
+#informacion{
+  margin-top: 20px;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+button{
+  border-style: none;
+  background-color: unset;
+}
+
+.btn{
+  width: 50%;
 }

@@ -1,115 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro de Apuesta</title>
-    <link rel="stylesheet" href="css/style.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!-- <script src="./javascript/codigo.js"></script> -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Apuesta</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <!-- <script src="./javascript/codigo.js"></script> -->
 </head>
+
 <body>
-    <header>
-      <nav class="navbar position-relative ">
-        <div class="d-flex flex-row ">
-            <img src="./img/horse.svg" alt="Logo"  height="80" class="d-inline-block imagen">
-            <div class="d-flex justify-content-center">
-              <p class="position-absolute top-20 start-50 translate-middle-x titulo">Centro de apuestas caballos de suerte</p>
-            </div>
+  <header>
+    <nav class="navbar position-relative ">
+      <div class="d-flex flex-row ">
+        <img src="./img/horse.svg" alt="Logo" height="80" class="d-inline-block imagen">
+        <div class="d-flex justify-content-center">
+          <p class="position-absolute top-20 start-50 translate-middle-x titulo">Centro de apuestas caballos de suerte
+          </p>
         </div>
-      </nav>
-    </header>
-    <section id="sect1" class="sect">
-      <video src="./img/caballosVideo.mp4" autoplay="true" muted="true" loop="true" poster="https://carontestudio.com/img/contacto.jpg"></video>
-      <h1>Tu sitio ideal de apuestas</h1>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius facilis officia nesciunt adipisci dolores facere exercitationem ducimus laudantium, quam laboriosam asperiores culpa eum sequi corrupti. Inventore facere debitis fugit cum.</p>
-    </section>
-    <section class="cartas">
-      <div class="card" style="width: 30rem;">
+      </div>
+    </nav>
+  </header>
+  <section id="sect1" class="sect">
+    <video src="./img/caballosVideo.mp4" autoplay="true" muted="true" loop="true"
+      poster="https://carontestudio.com/img/contacto.jpg"></video>
+    <h1>Tu sitio ideal de apuestas</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius facilis officia nesciunt adipisci dolores facere
+      exercitationem ducimus laudantium, quam laboriosam asperiores culpa eum sequi corrupti. Inventore facere debitis
+      fugit cum.</p>
+  </section>
+  <section class="cartas">
+    <button class="desplegarCaballo" infoid='1' onclick="clickCaballo(this)">
+      <div class="card">
         <img src="./img/CaballoNegro.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h3 class="card-title">Caballo Negro</h3>
-          
         </div>
       </div>
-      <div class="card" style="width: 30rem;">
+    </button>
+    <button class="desplegarCaballo" infoid='2' onclick="clickCaballo(this)">
+      <div class="card">
         <img src="./img/CaballoMarron.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h3 class="card-title">Caballo Marron</h3>
-          
         </div>
       </div>
-      <div class="card" style="width: 30rem;">
+    </button>
+    <button class="desplegarCaballo" infoid='3' onclick="clickCaballo(this)">
+      <div class="card">
         <img src="./img/CaballoBlanco.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h3 class="card-title">Caballo Blanco</h3>
-          
         </div>
       </div>
-      <div class="card" style="width: 30rem;">
+    </button>
+    <button class="desplegarCaballo" infoid='4' onclick="clickCaballo(this)">
+      <div class="card">
         <img src="./img/CaballoDorado.jpg" class="card-img-top" alt="...">
         <div class="card-body">
           <h3 class="card-title">Caballo Dorado</h3>
-          
         </div>
       </div>
-    </section>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h2>Seleccion de caballos</h2>
-          <h3>Nombre:</h3>
-          <h4>Velocidad:</h4>
-          <h4>Carreras:</h4>
+    </button>
+  </section>
+  <div class="container collapse" id="informacion">
+    <div class="row">
+      <div class="col">
+        <h2>Seleccion de caballos</h2>
+        <h3>Nombre: <span id="nombre"></span></h3>
+        <h4>Velocidad: <span id="velocidad"></span></h4>
+        <h4>Carreras: <span id="carreras"></span></h4>
+      </div>
+      <div class="col order-1">
+        <h3>Cuanto Apostaras por este caballo?</h3>
+        <input type="number" placeholder="0-1000$" id="apuesta">
+        <button class="btn btn-success" onclick="enviar(this)"> Aceptar </button>
+        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalReporte"
+          onclick="mostrarReporte()">Registro de Partidas</button>
+      </div>
+    </div>
+  </div>
+  </article>
+  </section>
+  <footer class="container-fluid">
+    <div class="row p-5 bg-secondary">
+      <div class="col-xs-12 col-ms-6 col-lg-3">
+        <a href="#">
+          <img src="./img/horse.svg" alt="Logo" height="80" class="d-inline-block imagen">
+        </a>
+      </div>
+      <div class="col-xs-12 col-ms-6 col-lg-3">
+        <p class="h5">Links
+        </p>
+        <div class="mb-2">
+          <a class="text-white text-decoration-none" href="#">Terms & Conditions
+
+          </a>
         </div>
-        <div class="col order-1">
-          <h3>Cuanto Apostaras por este caballo?</h3>
-          <input type="text">
+        <div class="mb-2">
+          <a class="text-white text-decoration-none" href="#">Privacy Policy
+
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-ms-6 col-lg-3">
+        <p class="h5">Contacto
+        </p>
+        <div class="mb-2">
+          <a class="text-white text-decoration-none" href="#">Facebook
+
+          </a>
+        </div>
+        <div class="mb-2">
+          <a class="text-white text-decoration-none" href="#">Instagram
+
+          </a>
         </div>
       </div>
     </div>
-      </article>
-    </section>
-    <footer class="container-fluid">
-      <div class="row p-5 bg-secondary">
-        <div class="col-xs-12 col-ms-6 col-lg-3">
-          <a href="#">
-            <img src="./img/horse.svg" alt="Logo"  height="80" class="d-inline-block imagen">
-          </a>
+  </footer>
+  <div class="modal fade" tabindex="-1" id="modalReporte">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Registro de Partidas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="col-xs-12 col-ms-6 col-lg-3">
-          <p class="h5">Links
-          </p>
-          <div class="mb-2">
-            <a class="text-white text-decoration-none"href="#">Terms & Conditions
-              
-            </a>
-          </div>
-          <div class="mb-2">
-            <a class="text-white text-decoration-none"href="#">Privacy Policy
-              
-            </a>
-          </div>
-        </div>
-        <div class="col-xs-12 col-ms-6 col-lg-3">
-          <p class="h5">Contacto
-          </p>
-          <div class="mb-2">
-            <a class="text-white text-decoration-none"href="#">Facebook
-              
-            </a>
-          </div>
-          <div class="mb-2">
-            <a class="text-white text-decoration-none"href="#">Instagram
-              
-            </a>
-          </div>
+        <div class="modal-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Caballo</th>
+                <th>Velocidad</th>
+                <th>Ganancias</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoReporte">
+
+            </tbody>
+          </table>
         </div>
       </div>
-    </footer>
-
-    
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script src="./javascript/codigo.js"></script>
 </body>
+
 </html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
