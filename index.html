@@ -29,9 +29,9 @@
     <video src="./img/caballosVideo.mp4" autoplay="true" muted="true" loop="true"
       poster="https://carontestudio.com/img/contacto.jpg"></video>
     <h1>Tu sitio ideal de apuestas</h1>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius facilis officia nesciunt adipisci dolores facere
-      exercitationem ducimus laudantium, quam laboriosam asperiores culpa eum sequi corrupti. Inventore facere debitis
-      fugit cum.</p>
+    <p>Centro de apuestas ideal para la familia que quiera tener una oportunidad sin igual, de poder hacerse millonarios
+      una vez que ganes podras cumplir todos tus sueños y cumplir por fin tu libertad financiera. Ven y apuesta por
+      nuestros cuatro maravillosos caballos (porque no nos alcanzo el presupuesto) APUESTA YA!</p>
   </section>
   <section class="cartas">
     <button class="desplegarCaballo" infoid='1' onclick="clickCaballo(this)">
@@ -137,11 +137,20 @@
                 <th>Caballo</th>
                 <th>Velocidad</th>
                 <th>Ganancias</th>
+                <th>Perdidas</th>
               </tr>
             </thead>
             <tbody id="cuerpoReporte">
 
             </tbody>
+            <tfoot>
+              <tr>
+                <td>Totales: </td>
+                <td></td>
+                <td id="gananciasTotales"></td>
+                <td id="perdidasTotales"></td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>

@@ -6,7 +6,7 @@ const caballos = [
 ];
 let opcion
 const listaDatos = JSON.parse(localStorage.getItem('listaDatos') ?? '[]')
-function carrera(ganancia) {
+function carrera(ganancia, perdida) {
    const n_random = Math.floor(Math.random() * caballos.length);
    const v_random = Math.floor(Math.random() * caballos.length);
    const nombre_caballo = caballos[n_random].nombre;
@@ -20,6 +20,7 @@ function carrera(ganancia) {
          icon: 'success',
          confirmButtonText: 'Cool'
       })
+      perdida = 0
    }
    else {// en caso contrario te dira el verdadero ganador
       Swal.fire({
@@ -33,7 +34,8 @@ function carrera(ganancia) {
    const datos = {
       nombre_caballo,
       velocidad_caballo,
-      ganancia
+      ganancia,
+      perdida
    }
 
    if (listaDatos.length === 10) {
@@ -64,22 +66,30 @@ function clickCaballo(botoncito) {
 function enviar() {
    const apuestaValor = apuesta.value
    const ganancia = apuestaValor * 2
-   carrera(ganancia)
+   carrera(ganancia, apuestaValor)
 }
 
 function mostrarReporte() {
 
    cuerpoReporte.innerHTML = ''
-
+   let gt = 0
+   let pt = 0
    for (const item of listaDatos) {
       cuerpoReporte.innerHTML += `
          <tr>
             <td>${item.nombre_caballo}</td>
             <td>${item.velocidad_caballo}</td>
             <td>${item.ganancia}</td>
+            <td>${item.perdida}</td>
          </tr>
       `
+      gt += parseInt(item.ganancia)
+      pt += parseInt(item.perdida)
    }
+
+   gananciasTotales.innerText = gt
+   perdidasTotales.innerText = pt
+
 }
 
 const informacionCollapse = new bootstrap.Collapse(informacion, {
