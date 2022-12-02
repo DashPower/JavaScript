@@ -1,11 +1,16 @@
-const caballos = [
-   { id: 1, nombre: 'Caballo Negro', velocidad: 40, carreras: 10 },
-   { id: 2, nombre: 'Caballo Marron', velocidad: 45, carreras: 15 },
-   { id: 3, nombre: 'Caballo Blanco', velocidad: 48, carreras: 5 },
-   { id: 4, nombre: 'Caballo Dorado', velocidad: 50, carreras: 20 }
-];
+let caballos
+
+window.addEventListener('load', cargarData)
+
 let opcion
 const listaDatos = JSON.parse(localStorage.getItem('listaDatos') ?? '[]')
+
+async function cargarData() {
+   const respuesta = await fetch('/javascript/caballos.json')
+   const data = await respuesta.json()
+   caballos = data
+}
+
 function carrera(ganancia, perdida) {
    const n_random = Math.floor(Math.random() * caballos.length);
    const v_random = Math.floor(Math.random() * caballos.length);
@@ -37,7 +42,6 @@ function carrera(ganancia, perdida) {
       ganancia,
       perdida
    }
-
    if (listaDatos.length === 10) {
       listaDatos.shift()
       listaDatos.push(datos)
@@ -47,7 +51,6 @@ function carrera(ganancia, perdida) {
       localStorage.setItem('listaDatos', JSON.stringify(listaDatos))
    }
 }
-
 function clickCaballo(botoncito) {
    const id = botoncito.getAttribute('infoid')
    const caballo = caballos.find(item => item.id == id)
@@ -55,7 +58,6 @@ function clickCaballo(botoncito) {
    velocidad.innerText = caballo.velocidad
    carreras.innerText = caballo.carreras
    opcion = id
-
    if (informacionCollapse._isShown()) {
       informacionCollapse.hide()
       setTimeout(() => informacionCollapse.show(), 500)
@@ -68,7 +70,6 @@ function enviar() {
    const ganancia = apuestaValor * 2
    carrera(ganancia, apuestaValor)
 }
-
 function mostrarReporte() {
 
    cuerpoReporte.innerHTML = ''
@@ -91,7 +92,6 @@ function mostrarReporte() {
    perdidasTotales.innerText = pt
 
 }
-
 const informacionCollapse = new bootstrap.Collapse(informacion, {
    toggle: false
 })

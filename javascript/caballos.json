@@ -1,0 +1,26 @@
+[
+   {
+      "id": 1,
+      "nombre": "Caballo Negro",
+      "velocidad": 40,
+      "carreras": 10
+   },
+   {
+      "id": 2,
+      "nombre": "Caballo Marron",
+      "velocidad": 45,
+      "carreras": 15
+   },
+   {
+      "id": 3,
+      "nombre": "Caballo Blanco",
+      "velocidad": 48,
+      "carreras": 5
+   },
+   {
+      "id": 4,
+      "nombre": "Caballo Dorado",
+      "velocidad": 50,
+      "carreras": 20
+   }
+]
