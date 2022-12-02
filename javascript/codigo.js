@@ -1,5 +1,5 @@
 let caballos
-
+let puntos = ''
 window.addEventListener('load', cargarData)
 
 let opcion
@@ -9,6 +9,23 @@ async function cargarData() {
    const respuesta = await fetch('/javascript/caballos.json')
    const data = await respuesta.json()
    caballos = data
+
+   //animacion de puntos, cargando
+   const intervaloPuntitos = setInterval(() => {
+      if (puntos.length < 3) puntos += '.'
+      else puntos = ''
+      loadingText.innerText = 'Loading' + puntos
+   }, 200)
+
+   //animacion de overlay, loading
+   setTimeout(() => {
+      overlayDiv.style.opacity = '0'
+      setTimeout(() => {
+         overlayDiv.style.display = 'none'
+         clearInterval(intervaloPuntitos);
+      }, 1000)
+   }, 1000)
+
 }
 
 function carrera(ganancia, perdida) {
